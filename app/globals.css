@@ -1,0 +1,159 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #0a0e17;
+  --foreground: #e0f0ff;
+  --card: #0d1320;
+  --card-foreground: #e0f0ff;
+  --popover: #0d1320;
+  --popover-foreground: #e0f0ff;
+  --primary: #00e5ff;
+  --primary-foreground: #0a0e17;
+  --secondary: #111a2e;
+  --secondary-foreground: #8ab4f8;
+  --muted: #111a2e;
+  --muted-foreground: #5a7a9a;
+  --accent: #00b8d4;
+  --accent-foreground: #0a0e17;
+  --destructive: #ff4444;
+  --destructive-foreground: #ffffff;
+  --border: #1a2a44;
+  --input: #1a2a44;
+  --ring: #00e5ff;
+  --chart-1: #00e5ff;
+  --chart-2: #00b8d4;
+  --chart-3: #0288d1;
+  --chart-4: #26c6da;
+  --chart-5: #80deea;
+  --radius: 0.75rem;
+  --neon-glow: #00e5ff;
+  --neon-dim: #00e5ff33;
+  --surface: #0f1923;
+  --surface-foreground: #c0d8f0;
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-neon-glow: var(--neon-glow);
+  --color-neon-dim: var(--neon-dim);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Neon glow keyframes */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px #00e5ff44, 0 0 20px #00e5ff22; }
+  50% { box-shadow: 0 0 16px #00e5ff66, 0 0 40px #00e5ff33; }
+}
+
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes waveform {
+  0%, 100% { height: 8px; }
+  50% { height: 28px; }
+}
+
+@keyframes waveform-speaking {
+  0%, 100% { height: 6px; }
+  25% { height: 24px; }
+  50% { height: 12px; }
+  75% { height: 32px; }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-status-pulse {
+  animation: status-pulse 1.5s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.neon-border {
+  border: 1px solid #00e5ff33;
+  box-shadow: 0 0 8px #00e5ff22, inset 0 0 8px #00e5ff11;
+}
+
+.neon-border-bright {
+  border: 1px solid #00e5ff66;
+  box-shadow: 0 0 12px #00e5ff44, inset 0 0 12px #00e5ff22;
+}
+
+.neon-text {
+  text-shadow: 0 0 8px #00e5ff88, 0 0 16px #00e5ff44;
+}
+
+/* Scrollbar styling for dark theme */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e17;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a2a44;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00e5ff44;
+}
