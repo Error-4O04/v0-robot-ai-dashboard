@@ -20,7 +20,7 @@ export function AQICard() {
 
   return (
     <div
-      className="neon-border rounded-xl bg-card/80 backdrop-blur-sm p-3 flex flex-col gap-2 animate-float"
+      className="neon-border rounded-xl bg-card/80 backdrop-blur-sm p-3 lg:p-4 flex flex-col gap-2 animate-float"
       style={{ animationDelay: "0.2s" }}
     >
       {/* Header */}

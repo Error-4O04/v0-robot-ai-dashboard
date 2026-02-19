@@ -40,7 +40,7 @@ export function RobotHeader({ status, robotName = "ROBO-X" }: RobotHeaderProps) 
   const config = statusConfig[status]
 
   return (
-    <header className="flex items-center justify-between px-4 py-3 neon-border rounded-xl bg-card/80 backdrop-blur-sm">
+    <header className="flex items-center justify-between px-4 lg:px-6 py-3 neon-border rounded-xl bg-card/80 backdrop-blur-sm">
       {/* Robot Name */}
       <div className="flex items-center gap-3">
         <div className="relative">

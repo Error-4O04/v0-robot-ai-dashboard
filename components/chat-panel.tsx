@@ -283,7 +283,7 @@ export function ChatPanel({ status, onStatusChange }: ChatPanelProps) {
               className={`flex ${isUser ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-[13px] leading-relaxed ${
+                className={`max-w-[85%] lg:max-w-[70%] px-3.5 py-2.5 rounded-xl text-[13px] lg:text-sm leading-relaxed ${
                   isUser
                     ? "bg-primary/15 text-primary border border-primary/20 rounded-br-sm"
                     : "bg-secondary/60 text-surface-foreground border border-border rounded-bl-sm"

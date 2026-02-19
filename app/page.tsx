@@ -13,7 +13,7 @@ export default function RobotDashboard() {
   const [status, setStatus] = useState<AIStatus>("Idle")
 
   return (
-    <main className="relative flex flex-col h-dvh max-w-md mx-auto bg-background overflow-hidden">
+    <main className="relative flex flex-col h-dvh w-full bg-background overflow-hidden">
       {/* Subtle background grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -42,14 +42,19 @@ export default function RobotDashboard() {
         {/* Top: Header */}
         <RobotHeader status={status} robotName="ROBO-X" />
 
-        {/* Middle: Chat Panel (takes remaining space) */}
-        <ChatPanel status={status} onStatusChange={setStatus} />
+        {/* Main content area: side by side on landscape, stacked on portrait */}
+        <div className="flex flex-col lg:flex-row flex-1 min-h-0 gap-3">
+          {/* Chat Panel (takes remaining space) */}
+          <div className="flex-1 min-h-0 min-w-0 flex flex-col">
+            <ChatPanel status={status} onStatusChange={setStatus} />
+          </div>
 
-        {/* Bottom: Info Cards */}
-        <div className="grid grid-cols-3 gap-2">
-          <WeatherCard />
-          <AQICard />
-          <SystemCard />
+          {/* Info Cards: row on portrait, column on landscape */}
+          <div className="grid grid-cols-3 lg:grid-cols-1 lg:w-72 xl:w-80 gap-2 lg:overflow-y-auto">
+            <WeatherCard />
+            <AQICard />
+            <SystemCard />
+          </div>
         </div>
 
         {/* Bottom edge decoration */}
