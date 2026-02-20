@@ -45,10 +45,10 @@ function WaveformAnimation({ type }: { type: "listening" | "speaking" }) {
               type === "listening"
                 ? "linear-gradient(180deg, #00e5ff, #00b8d4)"
                 : "linear-gradient(180deg, #00e676, #00b8d4)",
-            animation:
-              type === "listening"
-                ? `waveform ${0.6 + Math.random() * 0.4}s ease-in-out infinite`
-                : `waveform-speaking ${0.4 + Math.random() * 0.5}s ease-in-out infinite`,
+            animationName: type === "listening" ? "waveform" : "waveform-speaking",
+            animationDuration: `${type === "listening" ? 0.6 + Math.random() * 0.4 : 0.4 + Math.random() * 0.5}s`,
+            animationTimingFunction: "ease-in-out",
+            animationIterationCount: "infinite",
             animationDelay: `${i * 0.05}s`,
             height: "8px",
           }}
@@ -66,7 +66,10 @@ function TypingDots() {
           key={i}
           className="w-2 h-2 rounded-full bg-primary/60"
           style={{
-            animation: "status-pulse 1s ease-in-out infinite",
+            animationName: "status-pulse",
+            animationDuration: "1s",
+            animationTimingFunction: "ease-in-out",
+            animationIterationCount: "infinite",
             animationDelay: `${i * 0.2}s`,
           }}
         />
@@ -141,7 +144,9 @@ export function ChatPanel({ status, onStatusChange }: ChatPanelProps) {
           ) ||
           available.find((v) => v.lang.startsWith("en"))
         if (preferred) {
-          setTtsSettings((prev) => ({ ...prev, voiceURI: preferred.voiceURI }))
+          // prefer voiceURI but fall back to name for broader compatibility
+          const id = preferred.voiceURI || preferred.name
+          setTtsSettings((prev) => ({ ...prev, voiceURI: id }))
         }
       }
     }
@@ -207,9 +212,12 @@ export function ChatPanel({ status, onStatusChange }: ChatPanelProps) {
       // Use selected voice
       if (ttsSettings.voiceURI) {
         const selectedVoice = voices.find(
-          (v) => v.voiceURI === ttsSettings.voiceURI
+          (v) => (v.voiceURI && v.voiceURI === ttsSettings.voiceURI) || v.name === ttsSettings.voiceURI
         )
-        if (selectedVoice) utterance.voice = selectedVoice
+        if (selectedVoice) {
+          utterance.voice = selectedVoice
+          if (selectedVoice.lang) utterance.lang = selectedVoice.lang
+        }
       }
 
       utterance.onstart = () => {
@@ -533,42 +541,43 @@ export function ChatPanel({ status, onStatusChange }: ChatPanelProps) {
                 {text}
 
                 {/* Per-message TTS button for assistant messages */}
-                {!isUser && ttsEnabled && (
-                  <div className="flex items-center gap-1 mt-2 pt-1.5 border-t border-border/50">
-                    {isSpeakingThis ? (
-                      <button
-                        onClick={stopSpeaking}
-                        className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-destructive/15 border border-destructive/20 text-destructive text-[10px] tracking-wider uppercase hover:bg-destructive/25 transition-all"
-                        aria-label="Stop speaking"
-                      >
-                        <Square className="w-2.5 h-2.5" />
-                        Stop
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => speakText(text, msg.id)}
-                        className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-primary/10 border border-primary/15 text-primary/70 text-[10px] tracking-wider uppercase hover:bg-primary/20 hover:text-primary transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
-                        aria-label="Speak this message"
-                      >
-                        <Play className="w-2.5 h-2.5" />
-                        Speak
-                      </button>
-                    )}
-                    {isSpeakingThis && (
-                      <div className="flex items-center gap-[2px] ml-1">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <div
-                            key={i}
-                            className="w-[2px] rounded-full bg-primary"
-                            style={{
-                              animation: `waveform-speaking ${0.4 + Math.random() * 0.4}s ease-in-out infinite`,
-                              animationDelay: `${i * 0.06}s`,
-                              height: "4px",
-                            }}
-                          />
-                        ))}
-                      </div>
-                    )}
+                {!isUser && (
+                  speakingMsgId === msg.id ? (
+                    <button
+                      onClick={() => stopSpeaking()}
+                      className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-destructive/15 border border-destructive/20 text-destructive text-[10px] tracking-wider uppercase hover:bg-destructive/25 transition-all"
+                      aria-label="Stop speaking"
+                    >
+                      <Square className="w-2.5 h-2.5" />
+                      Stop
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => speakText(text, msg.id)}
+                      className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-primary/10 border border-primary/15 text-primary/70 text-[10px] tracking-wider uppercase hover:bg-primary/20 hover:text-primary transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
+                      aria-label="Speak this message"
+                    >
+                      <Play className="w-2.5 h-2.5" />
+                      Speak
+                    </button>
+                  )
+                )}
+                {isSpeakingThis && (
+                  <div className="flex items-center gap-[2px] ml-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <div
+                        key={i}
+                        className="w-[2px] rounded-full bg-primary"
+                          style={{
+                            animationName: "waveform-speaking",
+                            animationDuration: `${0.4 + Math.random() * 0.4}s`,
+                            animationTimingFunction: "ease-in-out",
+                            animationIterationCount: "infinite",
+                            animationDelay: `${i * 0.06}s`,
+                            height: "4px",
+                          }}
+                      />
+                    ))}
                   </div>
                 )}
               </div>

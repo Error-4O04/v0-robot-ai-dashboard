@@ -50,7 +50,7 @@ export default function RobotDashboard() {
           </div>
 
           {/* Info Cards: row on portrait, column on landscape */}
-          <div className="grid grid-cols-3 lg:grid-cols-1 lg:w-72 xl:w-80 gap-2 lg:overflow-y-auto">
+          <div className="grid grid-cols-3 lg:grid-cols-1 lg:w-56 xl:w-64 gap-2 lg:overflow-y-auto">
             <WeatherCard />
             <AQICard />
             <SystemCard />

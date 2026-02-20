@@ -17,11 +17,19 @@ function getAQIStatus(value: number) {
 export function AQICard() {
   const status = getAQIStatus(aqiValue)
   const percentage = Math.min((aqiValue / aqiMax) * 100, 100)
+  const today = new Date()
+  const todayLabel = today.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })
 
   return (
     <div
-      className="neon-border rounded-xl bg-card/80 backdrop-blur-sm p-3 lg:p-4 flex flex-col gap-2 animate-float"
-      style={{ animationDelay: "0.2s" }}
+      className="neon-border rounded-xl bg-card/80 backdrop-blur-sm p-3 lg:p-4 flex flex-col gap-2"
+      style={{
+        animationName: "float",
+        animationDuration: "3s",
+        animationTimingFunction: "ease-in-out",
+        animationIterationCount: "infinite",
+        animationDelay: "0.2s",
+      }}
     >
       {/* Header */}
       <div className="flex items-center justify-between">
@@ -31,7 +39,7 @@ export function AQICard() {
             className="text-[9px] font-bold tracking-[0.15em] text-primary uppercase"
             style={{ fontFamily: "var(--font-orbitron), monospace" }}
           >
-            Air Quality
+            Air Quality • {todayLabel}
           </span>
         </div>
       </div>

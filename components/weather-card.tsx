@@ -3,8 +3,20 @@
 import { CloudSun, Droplets, Wind, MapPin } from "lucide-react"
 
 export function WeatherCard() {
+  const today = new Date()
+  const todayLabel = today.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })
+
   return (
-    <div className="neon-border rounded-xl bg-card/80 backdrop-blur-sm p-3 lg:p-4 flex flex-col gap-2 animate-float" style={{ animationDelay: "0s" }}>
+    <div
+      className="neon-border rounded-xl bg-card/80 backdrop-blur-sm p-3 lg:p-4 flex flex-col gap-2"
+      style={{
+        animationName: "float",
+        animationDuration: "3s",
+        animationTimingFunction: "ease-in-out",
+        animationIterationCount: "infinite",
+        animationDelay: "0s",
+      }}
+    >
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
@@ -31,7 +43,7 @@ export function WeatherCard() {
           >
             18<span className="text-lg text-primary">{'\u00B0C'}</span>
           </p>
-          <p className="text-[10px] text-muted-foreground">Partly Cloudy</p>
+          <p className="text-[10px] text-muted-foreground">Partly Cloudy • {todayLabel}</p>
         </div>
         <div className="relative">
           <CloudSun className="w-10 h-10 text-primary/50" />

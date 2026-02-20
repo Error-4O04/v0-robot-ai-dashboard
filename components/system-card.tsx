@@ -37,8 +37,14 @@ export function SystemCard() {
 
   return (
     <div
-      className="neon-border rounded-xl bg-card/80 backdrop-blur-sm p-3 lg:p-4 flex flex-col gap-2 animate-float"
-      style={{ animationDelay: "0.4s" }}
+      className="neon-border rounded-xl bg-card/80 backdrop-blur-sm p-3 lg:p-4 flex flex-col gap-2"
+      style={{
+        animationName: "float",
+        animationDuration: "3s",
+        animationTimingFunction: "ease-in-out",
+        animationIterationCount: "infinite",
+        animationDelay: "0.4s",
+      }}
     >
       {/* Header */}
       <div className="flex items-center gap-1.5">
