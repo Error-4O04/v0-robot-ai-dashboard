@@ -38,19 +38,19 @@ export default function RobotDashboard() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col h-full p-3 gap-3">
+      <div className="relative z-10 flex flex-col h-full p-2 md:p-3 gap-2 md:gap-3">
         {/* Top: Header */}
         <RobotHeader status={status} robotName="ROBO-X" />
 
-        {/* Main content area: side by side on landscape, stacked on portrait */}
-        <div className="flex flex-col lg:flex-row flex-1 min-h-0 gap-3">
-          {/* Chat Panel (takes remaining space) */}
+        {/* Main content area: responsive layout */}
+        <div className="flex flex-col lg:flex-row flex-1 min-h-0 gap-2 md:gap-3">
+          {/* Chat Panel (takes most space) */}
           <div className="flex-1 min-h-0 min-w-0 flex flex-col">
             <ChatPanel status={status} onStatusChange={setStatus} />
           </div>
 
-          {/* Info Cards: row on portrait, column on landscape */}
-          <div className="grid grid-cols-3 lg:grid-cols-1 lg:w-56 xl:w-64 gap-2 lg:overflow-y-auto">
+          {/* Info Cards: responsive grid */}
+          <div className="grid grid-cols-3 lg:grid-cols-1 gap-1.5 md:gap-2 lg:w-56 xl:w-72 lg:overflow-y-auto">
             <WeatherCard />
             <AQICard />
             <SystemCard />
@@ -61,7 +61,7 @@ export default function RobotDashboard() {
         <div className="flex items-center justify-center gap-2 pb-1">
           <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
           <span
-            className="text-[8px] text-muted-foreground/40 tracking-[0.3em] uppercase"
+            className="text-[7px] md:text-[8px] text-muted-foreground/40 tracking-[0.3em] uppercase"
             style={{ fontFamily: "var(--font-orbitron), monospace" }}
           >
             ROBO-X OS v2.4.1

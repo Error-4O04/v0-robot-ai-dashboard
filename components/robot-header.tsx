@@ -40,23 +40,23 @@ export function RobotHeader({ status, robotName = "ROBO-X" }: RobotHeaderProps) 
   const config = statusConfig[status]
 
   return (
-    <header className="flex items-center justify-between px-4 lg:px-6 py-3 neon-border rounded-xl bg-card/80 backdrop-blur-sm">
+    <header className="flex items-center justify-between px-2 md:px-4 lg:px-6 py-2 md:py-3 neon-border rounded-xl bg-card/80 backdrop-blur-sm">
       {/* Robot Name */}
-      <div className="flex items-center gap-3">
-        <div className="relative">
+      <div className="flex items-center gap-2 md:gap-3 min-w-0">
+        <div className="relative flex-shrink-0">
           <div
-            className="w-10 h-10 rounded-lg flex items-center justify-center border border-primary/30"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center border border-primary/30"
             style={{
               background: "linear-gradient(135deg, #0d1320 0%, #111a2e 100%)",
               boxShadow: `0 0 12px ${config.glowColor}33`,
             }}
           >
             <svg
-              width="22"
-              height="22"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
-              className="text-primary"
+              className="text-primary md:w-[22px] md:h-[22px]"
             >
               <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.5" />
               <path
@@ -79,40 +79,40 @@ export function RobotHeader({ status, robotName = "ROBO-X" }: RobotHeaderProps) 
             </svg>
           </div>
         </div>
-        <div>
+        <div className="min-w-0">
           <h1
-            className="text-lg font-bold tracking-[0.2em] text-primary neon-text"
+            className="text-base md:text-lg font-bold tracking-[0.1em] md:tracking-[0.2em] text-primary neon-text truncate"
             style={{ fontFamily: "var(--font-orbitron), monospace" }}
           >
             {robotName}
           </h1>
-          <p className="text-[10px] text-muted-foreground tracking-widest uppercase">
+          <p className="text-[8px] md:text-[10px] text-muted-foreground tracking-widest uppercase">
             Humanoid AI System
           </p>
         </div>
       </div>
 
       {/* Status + Time */}
-      <div className="flex items-center gap-3">
-        <div className="text-right mr-2">
-          <p className="text-xs text-muted-foreground font-mono">{time}</p>
+      <div className="flex items-center gap-1.5 md:gap-3 flex-shrink-0">
+        <div className="text-right mr-0 md:mr-2 hidden sm:block">
+          <p className="text-[9px] md:text-xs text-muted-foreground font-mono">{time}</p>
         </div>
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-secondary/50 border border-border">
+        <div className="flex items-center gap-1.5 md:gap-2 px-2 md:px-3 py-1 md:py-1.5 rounded-lg bg-secondary/50 border border-border">
           <div className="relative">
             <div
-              className={`w-2.5 h-2.5 rounded-full ${config.color}`}
+              className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full ${config.color}`}
               style={{
                 boxShadow: `0 0 8px ${config.glowColor}, 0 0 16px ${config.glowColor}66`,
               }}
             />
             {status !== "Idle" && (
               <div
-                className={`absolute inset-0 w-2.5 h-2.5 rounded-full ${config.color} animate-status-pulse`}
+                className={`absolute inset-0 w-2 h-2 md:w-2.5 md:h-2.5 rounded-full ${config.color} animate-status-pulse`}
               />
             )}
           </div>
           <span
-            className="text-[10px] font-bold tracking-[0.15em]"
+            className="text-[8px] md:text-[10px] font-bold tracking-[0.1em] md:tracking-[0.15em]"
             style={{ color: config.glowColor }}
           >
             {config.label}
